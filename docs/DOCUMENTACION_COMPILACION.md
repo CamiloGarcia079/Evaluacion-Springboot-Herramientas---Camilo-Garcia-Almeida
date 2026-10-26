@@ -35,8 +35,8 @@ Si aparece una versión menor a 17, la compilación va a fallar con un error de 
 ## 2. Clonar el proyecto
 
 ```bash
-git clone https://github.com/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia.git
-cd Proyecto_RentaHerramientas_CamiloGarcia
+git clone https://github.com/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida.git
+cd Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida
 ```
 
 ---

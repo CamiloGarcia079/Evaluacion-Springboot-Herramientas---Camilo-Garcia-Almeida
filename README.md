@@ -2,9 +2,9 @@
 
 # 🏗️ Plataforma de Renta de Herramientas y Equipos de Construcción 🚜
 
-[![GitHub Stars](https://img.shields.io/github/stars/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia?style=for-the-badge&logo=github&color=gold)](https://github.com/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia?style=for-the-badge&logo=github&color=blue)](https://github.com/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia?style=for-the-badge&logo=github&color=red)](https://github.com/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida?style=for-the-badge&logo=github&color=gold)](https://github.com/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida?style=for-the-badge&logo=github&color=blue)](https://github.com/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida?style=for-the-badge&logo=github&color=red)](https://github.com/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida/issues)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 <br/>
@@ -14,7 +14,7 @@
 [![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT%200.12.6-6DB33F?style=flat-square&logo=springsecurity&logoColor=white)](https://jwt.io/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0%20(4FN)-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Swagger OpenAPI](https://img.shields.io/badge/OpenAPI%203.0-Swagger%20UI-85EA2D?style=flat-square&logo=swagger&logoColor=black)](http://localhost:8080/api/v1/swagger-ui.html)
-[![Tests](https://img.shields.io/badge/Tests-61%20Passed-brightgreen?style=flat-square&logo=junit5&logoColor=white)](https://junit.org/junit5/)
+[![Tests](https://img.shields.io/badge/Tests-112%20Passed-brightgreen?style=flat-square&logo=junit5&logoColor=white)](https://junit.org/junit5/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 
 <p align="center">
@@ -117,7 +117,7 @@ El proyecto sigue una **Arquitectura Hexagonal (Ports and Adapters)** combinada 
 ### 📐 Estructura Hexagonal DDD por Bounded Context
 
 ```text
-c:\Users\osori\Desktop\proyecto-final-spring\
+Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida/
 │
 ├── src/main/java/com/rentaherramientas/
 │   │
@@ -209,8 +209,8 @@ Para ejecutar la plataforma localmente se requiere:
 
 ### 1. Clonar el Repositorio
 ```powershell
-git clone https://github.com/TU_USUARIO/Proyecto_RentaHerramientas_CamiloGarcia.git
-cd Proyecto_RentaHerramientas_CamiloGarcia
+git clone https://github.com/CamiloGarcia079/Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida.git
+cd Evaluacion-Springboot-Herramientas---Camilo-Garcia-Almeida
 ```
 
 ### 2. Arranque rápido (recomendado)
@@ -654,7 +654,7 @@ La solución cuenta con una suite completa de **106 pruebas automatizadas (unita
 ```text
 [INFO] Results:
 [INFO] 
-[INFO] Tests run: 61, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 112, Failures: 0, Errors: 0, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
