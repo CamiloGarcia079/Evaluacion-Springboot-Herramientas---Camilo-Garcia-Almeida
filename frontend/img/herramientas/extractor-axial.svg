@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Extractor Axial de Obra">
+<defs>
+ <linearGradient id="f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
+ <radialGradient id="r" cx="0.5" cy="0.42" r="0.5"><stop offset="0" stop-color="#34d399" stop-opacity="0.28"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="400" height="300" fill="url(#f)"/>
+<path d="M0 260 L400 230 L400 300 L0 300 Z" fill="#34d399" fill-opacity="0.08"/>
+<circle cx="200" cy="125" r="120" fill="url(#r)"/>
+<g transform="translate(95 18) scale(1.05)" fill="#34d399" stroke="#34d399" stroke-linejoin="round">
+<style>.h{fill:#0f172a;stroke:none}.hs{stroke:#0f172a}</style>
+<circle cx="100" cy="100" r="58" fill="none" stroke-width="10"/><circle cx="100" cy="100" r="10"/>
+  <path d="M100 90 C80 60 110 50 115 72 Z M110 100 C140 80 150 110 128 115 Z M100 110 C120 140 90 150 85 128 Z M90 100 C60 120 50 90 72 85 Z"/>
+</g>
+<text x="20" y="34" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#34d399">RENTATOOLS</text>
+<text x="20" y="262" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#f8fafc">Extractor Axial de Obra</text>
+<text x="20" y="284" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#94a3b8">Canarm</text>
+</svg>

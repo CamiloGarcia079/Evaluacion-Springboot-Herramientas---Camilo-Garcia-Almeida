@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080c14">
+    <title>Catálogo de equipos | RentaTools</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="barra-superior">
+    <div class="contenedor">
+        <a href="index.html" class="marca">
+            <div class="marca-icono">🏗️</div>
+            <div>RENTA<span>TOOLS</span><small class="marca-sub">EQUIPOS DE CONSTRUCCIÓN</small></div>
+        </a>
+        <nav class="menu" id="menu-sesion"></nav>
+    </div>
+</header>
+
+<main class="contenedor seccion">
+
+    <!-- Portada -->
+    <section class="hero-catalogo">
+        <div class="hero-fondo"></div>
+        <div class="hero-contenido">
+            <div class="hero-tag">🚜 Alquiler de maquinaria y herramientas</div>
+            <h1 class="hero-titulo">Equipos listos para <span>tu obra</span></h1>
+            <p class="hero-descripcion">
+                Reserve en línea, consulte la disponibilidad por fechas, pague con la pasarela
+                y reciba su factura electrónica con el IVA del 19 % desglosado.
+            </p>
+            <div class="hero-estadisticas">
+                <div class="stat-item"><h4 id="stat-equipos">—</h4><p>Equipos en catálogo</p></div>
+                <div class="stat-item"><h4 id="stat-disponibles">—</h4><p>Disponibles hoy</p></div>
+                <div class="stat-item"><h4 id="stat-categorias">—</h4><p>Categorías</p></div>
+                <div class="stat-item"><h4 id="stat-resenas">—</h4><p>Reseñas de clientes</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorias rapidas (se llenan desde /categorias) -->
+    <div class="pildoras-categorias" id="contenedor-pildoras">
+        <button class="pildora-cat activa" data-cat="">⚡ Todas</button>
+    </div>
+
+    <div id="mensaje" class="mensaje"></div>
+
+    <!-- Filtros -->
+    <section class="tarjeta" style="margin-bottom:24px;">
+        <h2>🔍 Buscar equipos</h2>
+        <form id="form-filtros">
+            <div class="filtros">
+                <div class="grupo-campo">
+                    <label for="texto">Nombre, marca o modelo</label>
+                    <input type="text" id="texto" name="texto" placeholder="Ej: rana, Bosch, generador">
+                </div>
+                <div class="grupo-campo">
+                    <label for="idCategoria">Categoría</label>
+                    <select id="idCategoria" name="idCategoria">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+                <div class="grupo-campo">
+                    <label for="precioMinimo">Tarifa mínima / día</label>
+                    <input type="number" id="precioMinimo" name="precioMinimo" min="0" step="5000" placeholder="$ 0">
+                </div>
+                <div class="grupo-campo">
+                    <label for="precioMaximo">Tarifa máxima / día</label>
+                    <input type="number" id="precioMaximo" name="precioMaximo" min="0" step="5000" placeholder="$ 500.000">
+                </div>
+                <div class="grupo-campo">
+                    <label for="ubicacion">Ciudad del proveedor</label>
+                    <input type="text" id="ubicacion" name="ubicacion" placeholder="Medellín, Cali...">
+                </div>
+                <div class="grupo-campo">
+                    <label for="soloDisponibles">Disponibilidad</label>
+                    <select id="soloDisponibles" name="soloDisponibles">
+                        <option value="false">Toda la flota</option>
+                        <option value="true">Solo disponibles hoy</option>
+                    </select>
+                </div>
+                <div class="grupo-campo">
+                    <label for="orden">Ordenar por</label>
+                    <select id="orden" name="orden">
+                        <option value="RECIENTES">Más recientes</option>
+                        <option value="PRECIO_ASC">Precio: menor a mayor</option>
+                        <option value="PRECIO_DESC">Precio: mayor a menor</option>
+                        <option value="NOMBRE_ASC">Nombre: A - Z</option>
+                        <option value="NOMBRE_DESC">Nombre: Z - A</option>
+                    </select>
+                </div>
+            </div>
+            <div class="fila-botones">
+                <button type="submit" class="boton">Buscar</button>
+                <button type="button" class="boton boton-secundario" id="btn-limpiar">Limpiar filtros</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Resultados -->
+    <section>
+        <div class="fila-encabezado">
+            <div>
+                <h2 id="titulo-resultados">Equipos</h2>
+                <p class="subtitulo" id="subtitulo-resultados" style="margin:0;"></p>
+            </div>
+        </div>
+        <div id="resultados" class="rejilla-tarjetas"></div>
+        <nav class="paginacion" id="paginacion" aria-label="Paginación del catálogo"></nav>
+    </section>
+
+</main>
+
+<!-- Modal: ficha de la herramienta -->
+<div class="fondo-modal" id="modal-detalle">
+    <div class="modal modal-ancho">
+        <div class="cabecera-modal">
+            <h2 id="detalle-titulo">Ficha del equipo</h2>
+            <button class="cerrar-modal" data-cerrar="modal-detalle" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="cuerpo-modal" id="detalle-cuerpo"></div>
+        <div class="pie-modal">
+            <button class="boton boton-secundario" data-cerrar="modal-detalle">Cerrar</button>
+            <button class="boton" id="btn-abrir-reserva">Reservar este equipo</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: solicitud de reserva -->
+<div class="fondo-modal" id="modal-crear-reserva">
+    <div class="modal">
+        <div class="cabecera-modal">
+            <h2>Solicitar alquiler</h2>
+            <button class="cerrar-modal" data-cerrar="modal-crear-reserva" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="cuerpo-modal">
+            <p class="subtitulo" id="reserva-modal-subtitulo"></p>
+            <div id="reserva-mensaje" class="mensaje"></div>
+
+            <form id="form-crear-reserva">
+                <input type="hidden" id="reserva-id-herramienta">
+                <input type="hidden" id="reserva-tarifa-diaria">
+
+                <div class="fila-campos">
+                    <div class="grupo-campo">
+                        <label for="reserva-fecha-inicio">Fecha de inicio *</label>
+                        <input type="date" id="reserva-fecha-inicio" required>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="reserva-fecha-fin">Fecha de devolución *</label>
+                        <input type="date" id="reserva-fecha-fin" required>
+                    </div>
+                </div>
+
+                <div id="reserva-disponibilidad" class="aviso-disponibilidad"></div>
+
+                <div class="grupo-campo" style="margin-top:14px;">
+                    <label for="reserva-notas">Dirección de la obra y observaciones</label>
+                    <textarea id="reserva-notas" rows="2" maxlength="255"
+                              placeholder="Dirección de entrega, persona de contacto, horario..."></textarea>
+                </div>
+
+                <div class="caja-factura" style="margin-top:16px;">
+                    <div class="factura-header">
+                        <h4>Cotización estimada</h4>
+                        <span class="insignia insignia-en_curso" id="reserva-dias-calculados">1 día</span>
+                    </div>
+                    <div class="factura-fila-total"><span>Valor del alquiler:</span><strong id="reserva-monto-calculado">$ 0</strong></div>
+                    <div class="factura-fila-total"><span>Depósito de garantía (30 %, reembolsable):</span><strong id="reserva-deposito-calculado">$ 0</strong></div>
+                    <div class="factura-fila-total gran-total"><span>Total comprometido:</span><strong id="reserva-total-compromiso">$ 0</strong></div>
+                    <p class="ayuda-campo" style="margin-top:8px;">El precio lo fija el servidor con la tarifa vigente. El valor final se confirma al crear la reserva.</p>
+                </div>
+
+                <div class="fila-botones fila-botones-derecha">
+                    <button type="button" class="boton boton-secundario" data-cerrar="modal-crear-reserva">Cancelar</button>
+                    <button type="submit" class="boton" id="btn-confirmar-reserva">Enviar solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/comun.js"></script>
+<script src="js/catalogo.js"></script>
+</body>
+</html>

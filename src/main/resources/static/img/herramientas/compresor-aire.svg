@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Compresor de Aire 185 CFM">
+<defs>
+ <linearGradient id="f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
+ <radialGradient id="r" cx="0.5" cy="0.42" r="0.5"><stop offset="0" stop-color="#60a5fa" stop-opacity="0.28"/><stop offset="1" stop-color="#60a5fa" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="400" height="300" fill="url(#f)"/>
+<path d="M0 260 L400 230 L400 300 L0 300 Z" fill="#60a5fa" fill-opacity="0.08"/>
+<circle cx="200" cy="125" r="120" fill="url(#r)"/>
+<g transform="translate(95 18) scale(1.05)" fill="#60a5fa" stroke="#60a5fa" stroke-linejoin="round">
+<style>.h{fill:#0f172a;stroke:none}.hs{stroke:#0f172a}</style>
+<rect x="45" y="75" width="110" height="60" rx="30"/><rect x="65" y="55" width="40" height="22" rx="4"/>
+  <circle cx="135" cy="105" r="12" class="h"/><circle cx="65" cy="150" r="12"/><circle cx="135" cy="150" r="12"/>
+</g>
+<text x="20" y="34" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#60a5fa">RENTATOOLS</text>
+<text x="20" y="262" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#f8fafc">Compresor de Aire 185 CFM</text>
+<text x="20" y="284" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#94a3b8">Atlas Copco</text>
+</svg>

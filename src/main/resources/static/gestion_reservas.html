@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080c14">
+    <title>Gestión de reservas | RentaTools</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="barra-superior">
+    <div class="contenedor">
+        <a href="index.html" class="marca">
+            <div class="marca-icono">🏗️</div>
+            <div>RENTA<span>TOOLS</span><small class="marca-sub">EQUIPOS DE CONSTRUCCIÓN</small></div>
+        </a>
+        <nav class="menu" id="menu-sesion"></nav>
+    </div>
+</header>
+
+<main class="contenedor seccion">
+
+    <div class="fila-encabezado">
+        <div>
+            <h1>Gestión de reservas</h1>
+            <p class="subtitulo" style="margin:0;" id="subtitulo-gestion">Apruebe solicitudes, despache equipos y reciba devoluciones.</p>
+        </div>
+        <button class="boton boton-secundario" id="btn-refrescar-todo">Actualizar</button>
+    </div>
+
+    <div id="mensaje" class="mensaje"></div>
+
+    <div class="rejilla-kpis" id="resumen-estados"></div>
+
+    <section class="tarjeta" style="margin-bottom:24px;">
+        <div class="fila-encabezado">
+            <h2>Reservas</h2>
+            <select id="filtro-estado-reserva" class="select-compacto">
+                <option value="">Todos los estados</option>
+                <option value="SOLICITADA">Solicitadas</option>
+                <option value="APROBADA">Aprobadas</option>
+                <option value="EN_CURSO">En curso</option>
+                <option value="FINALIZADA">Finalizadas</option>
+                <option value="RECHAZADA">Rechazadas</option>
+                <option value="CANCELADA">Canceladas</option>
+            </select>
+        </div>
+        <div class="envoltura-tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Cliente</th>
+                        <th>Equipos</th>
+                        <th>Fechas</th>
+                        <th>Estado</th>
+                        <th>Valor</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-gestion-reservas"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="tarjeta">
+        <h2>Devoluciones recibidas</h2>
+        <div class="envoltura-tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Reserva</th>
+                        <th>Fecha real</th>
+                        <th>Retraso</th>
+                        <th>Estado del equipo</th>
+                        <th>Cargos</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-devoluciones"></tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<!-- Modal: rechazo -->
+<div class="fondo-modal" id="modal-rechazo">
+    <div class="modal" style="max-width:480px;">
+        <div class="cabecera-modal">
+            <h2>Rechazar solicitud</h2>
+            <button class="cerrar-modal" data-cerrar="modal-rechazo" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="cuerpo-modal">
+            <div id="rechazo-mensaje" class="mensaje"></div>
+            <p class="subtitulo" id="rechazo-subtitulo"></p>
+            <form id="form-rechazo">
+                <input type="hidden" id="rechazo-id">
+                <div class="grupo-campo">
+                    <label for="rechazo-motivo">Motivo (lo verá el cliente) *</label>
+                    <textarea id="rechazo-motivo" rows="3" required minlength="5" maxlength="255"
+                              placeholder="Ej: el equipo estará en mantenimiento esas fechas"></textarea>
+                </div>
+                <div class="fila-botones fila-botones-derecha">
+                    <button type="button" class="boton boton-secundario" data-cerrar="modal-rechazo">Volver</button>
+                    <button type="submit" class="boton boton-peligro" id="btn-confirmar-rechazo">Rechazar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: recepcion del equipo (devolucion) -->
+<div class="fondo-modal" id="modal-checkin">
+    <div class="modal modal-ancho">
+        <div class="cabecera-modal">
+            <h2>Recibir devolución</h2>
+            <button class="cerrar-modal" data-cerrar="modal-checkin" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="cuerpo-modal">
+            <p class="subtitulo" id="checkin-subtitulo"></p>
+            <div id="checkin-mensaje" class="mensaje"></div>
+
+            <form id="form-checkin">
+                <input type="hidden" id="checkin-id-reserva">
+
+                <div class="fila-campos">
+                    <div class="grupo-campo">
+                        <label>Fecha pactada</label>
+                        <input type="text" id="checkin-fecha-pactada" readonly>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="checkin-fecha-real">Fecha real de entrega *</label>
+                        <input type="date" id="checkin-fecha-real" required>
+                    </div>
+                </div>
+                <p class="ayuda-campo" id="checkin-alerta-retraso"></p>
+
+                <div class="grupo-campo">
+                    <label for="checkin-estado-general">Estado general del equipo *</label>
+                    <select id="checkin-estado-general" required>
+                        <option value="BUEN_ESTADO">Buen estado</option>
+                        <option value="DANO_LEVE">Daño leve</option>
+                        <option value="DANO_GRAVE">Daño grave</option>
+                        <option value="PERDIDA_TOTAL">Pérdida total</option>
+                    </select>
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="checkin-observaciones">Observaciones</label>
+                    <textarea id="checkin-observaciones" rows="2" maxlength="500" placeholder="Estado de entrega, accesorios, limpieza..."></textarea>
+                </div>
+
+                <label class="casilla">
+                    <input type="checkbox" id="checkin-tiene-dano">
+                    <span>El equipo tiene un daño que se debe reportar</span>
+                </label>
+
+                <div id="seccion-dano" class="bloque-dano oculto">
+                    <div class="fila-campos">
+                        <div class="grupo-campo">
+                            <label for="dano-id-herramienta">Herramienta afectada *</label>
+                            <select id="dano-id-herramienta"></select>
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="dano-tipo">Tipo de daño *</label>
+                            <select id="dano-tipo">
+                                <option value="ESTETICO">Estético</option>
+                                <option value="MECANICO">Mecánico</option>
+                                <option value="ELECTRICO">Eléctrico</option>
+                                <option value="FALTANTE_PIEZA">Faltante de pieza</option>
+                                <option value="IRREPARABLE">Irreparable (se da de baja)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="dano-descripcion">Descripción *</label>
+                        <input type="text" id="dano-descripcion" maxlength="255" placeholder="Qué se encontró">
+                    </div>
+                    <div class="fila-campos">
+                        <div class="grupo-campo">
+                            <label for="dano-costo">Costo estimado de reparación *</label>
+                            <input type="number" id="dano-costo" min="0" step="1000" placeholder="50000">
+                        </div>
+                        <div class="grupo-campo">
+                            <label for="dano-responsable">Quién asume el costo *</label>
+                            <select id="dano-responsable">
+                                <option value="CLIENTE">Cliente (se le genera un cargo)</option>
+                                <option value="PROVEEDOR">Proveedor (desgaste normal)</option>
+                                <option value="POLIZA_GARANTIA">Póliza de garantía</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="dano-foto-url">URL de una foto de evidencia (opcional)</label>
+                        <input type="text" id="dano-foto-url" maxlength="255" placeholder="https://...">
+                    </div>
+                    <p class="ayuda-campo">La herramienta dañada queda EN MANTENIMIENTO (o FUERA DE SERVICIO si es irreparable).</p>
+                </div>
+
+                <div class="fila-botones fila-botones-derecha">
+                    <button type="button" class="boton boton-secundario" data-cerrar="modal-checkin">Cancelar</button>
+                    <button type="submit" class="boton" id="btn-guardar-checkin">Registrar devolución</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: detalle de devolucion -->
+<div class="fondo-modal" id="modal-detalle-devolucion">
+    <div class="modal modal-ancho">
+        <div class="cabecera-modal">
+            <h2 id="titulo-detalle-devolucion">Devolución</h2>
+            <button class="cerrar-modal" data-cerrar="modal-detalle-devolucion" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="cuerpo-modal" id="cuerpo-detalle-devolucion"></div>
+        <div class="pie-modal">
+            <button class="boton boton-secundario" data-cerrar="modal-detalle-devolucion">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/comun.js"></script>
+<script src="js/gestion_reservas.js"></script>
+</body>
+</html>
